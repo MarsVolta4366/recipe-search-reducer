@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useContext } from "react"
+import { ThemeContext } from "./context/ThemeContext"
 import "./scss/_main.scss"
 
 function App() {
 
-  const [theme, setTheme] = useState("light")
+  const { theme, setTheme } = useContext(ThemeContext)
 
   return (
     <div className={theme}>
