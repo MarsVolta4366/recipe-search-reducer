@@ -24,7 +24,11 @@ const Navbar = () => {
                 <li>About</li>
                 <li>Contact</li>
                 <li>Spoonacular API</li>
-                <li><DarkMode onClick={() => setTheme(theme === "light" ? "dark" : "light")} /></li>
+                <li><DarkMode onClick={() => {
+                    theme === "light" ? localStorage.setItem("theme", "dark") : localStorage.setItem("theme", "light")
+                    setTheme(theme === "light" ? "dark" : "light")
+                }} />
+                </li>
             </ul>
         </nav>
     )
