@@ -38,10 +38,11 @@
 
     .light.searchInput {
         background-color: white;
+        color: $dark-900;
     }
 
     .dark.searchInput {
-        background-color: $gray-900;
+        background-color: $dark-700;
         color: white;
     }
 
@@ -59,7 +60,7 @@
     .dark.searchIcon {
         color: $gray-600;
         margin-right: 5px;
-        background-color: $gray-900;
+        background-color: $dark-700;
         cursor: pointer;
 
         &:hover {
