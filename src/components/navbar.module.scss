@@ -3,11 +3,13 @@
 .nav {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 
     h1 {
         color: $dark-000;
+        margin: 1em;
+        font-size: 24px;
     }
 
     ul {
@@ -18,9 +20,50 @@
         font-weight: bold;
         cursor: pointer;
         color: $dark-000;
+        padding: 0;
 
         li {
             margin: 1em;
+            white-space: nowrap;
+            font-size: 16px;
+        }
+    }
+
+    .searchInput {
+        width: 100%;
+        border-radius: 5px;
+        padding: 5px;
+        border: 1px solid $dark-100  !important;
+    }
+
+    .light.searchInput {
+        background-color: white;
+    }
+
+    .dark.searchInput {
+        background-color: $gray-900;
+        color: white;
+    }
+
+    .light.searchIcon {
+        color: $gray-700;
+        margin-right: 5px;
+        background-color: white;
+        cursor: pointer;
+
+        &:hover {
+            color: $dark-900;
+        }
+    }
+
+    .dark.searchIcon {
+        color: $gray-600;
+        margin-right: 5px;
+        background-color: $gray-900;
+        cursor: pointer;
+
+        &:hover {
+            color: white;
         }
     }
 }
