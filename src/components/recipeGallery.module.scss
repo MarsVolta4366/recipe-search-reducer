@@ -1,0 +1,23 @@
+@use "../scss/abstracts/colors" as *;
+
+.card {
+    margin: 10px;
+}
+
+.light.card {
+    background-color: white;
+    box-shadow: none;
+}
+
+.dark.card {
+    background-color: $dark-700;
+    box-shadow: none;
+}
+
+.dark.cardContent {
+    background-color: $dark-700;
+}
+
+.light.cardContent {
+    background-color: white;
+}
