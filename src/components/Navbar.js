@@ -1,6 +1,7 @@
 import { DarkMode, Search } from "@mui/icons-material"
 import { Input, InputAdornment } from "@mui/material"
 import { useContext } from "react"
+import { Link } from "react-router-dom"
 import { ThemeContext } from "../context/ThemeContext"
 import styles from "./navbar.module.scss"
 
@@ -10,7 +11,9 @@ const Navbar = () => {
 
     return (
         <nav className={`${styles.nav} ${styles[theme]}`}>
-            <h1 className="text">RecipeSearch</h1>
+            <Link to="/" className="link">
+                <h1 className="text">RecipeSearch</h1>
+            </Link>
             <Input
                 className={`${styles.searchInput} ${styles[theme]}`}
                 disableUnderline={true}
