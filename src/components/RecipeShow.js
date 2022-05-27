@@ -1,6 +1,6 @@
-import { CircularProgress } from "@mui/material"
 import { useParams } from "react-router-dom"
 import useFetchRecipes from "../helpers/useFetchRecipes"
+import LoadingSpinner from "./LoadingSpinner"
 
 const RecipeShow = () => {
 
@@ -11,9 +11,7 @@ const RecipeShow = () => {
 
     return (
         <>
-            {loading && <div className="flex">
-                <CircularProgress style={{ marginTop: "10px" }} />
-            </div>}
+            {loading && <LoadingSpinner />}
             RECIPE SHOW
         </>
     )

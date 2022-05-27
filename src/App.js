@@ -1,6 +1,6 @@
-import { CircularProgress } from "@mui/material"
 import { useContext, useState } from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import LoadingSpinner from "./components/LoadingSpinner"
 import Navbar from "./components/Navbar"
 import RecipeGallery from "./components/RecipeGallery"
 import RecipeShow from "./components/RecipeShow"
@@ -26,10 +26,8 @@ function App() {
           <Routes>
             <Route path="/" element={
               <>
-                {/* Loading div only displays when loading === true */}
-                {loading && <div className="flex">
-                  <CircularProgress style={{ marginTop: "10px" }} />
-                </div>}
+                {/* LoadingSpinner only displays when loading === true */}
+                {loading && <LoadingSpinner />}
                 <RecipeGallery data={data} />
               </>
             } />
