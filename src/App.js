@@ -17,13 +17,16 @@ function App() {
   console.log(data)
 
   return (
-    <div className={theme}>
-      <div className="background">
+    <div className={`${theme}`}>
+      <div className="background container">
         <Router>
           <Navbar />
-          <div className="center">
-            {loading && <CircularProgress style={{ marginTop: "10px" }} />}
-          </div>
+          {/* Spacing div because of fixed navbar */}
+          <div style={{ height: "75px" }}></div>
+          {/* Loading div only displays when loading === true */}
+          {loading && <div className="flex">
+            <CircularProgress style={{ marginTop: "10px" }} />
+          </div>}
           <Routes>
             <Route path="/" element={
               <RecipeGallery data={data} />

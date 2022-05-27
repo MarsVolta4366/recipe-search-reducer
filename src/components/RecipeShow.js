@@ -1,7 +1,7 @@
 const RecipeShow = () => {
     return (
         <>
-        RECIPE SHOW
+            RECIPE SHOW
         </>
     )
 }

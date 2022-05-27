@@ -31,12 +31,15 @@ body {
 
 .flex {
     display: flex;
-    min-height: 100vh;
     height: 100%;
     flex-wrap: wrap;
     justify-content: center;
     align-items: baseline;
     align-content: flex-start;
+}
+
+.container {
+    min-height: 100vh;
 }
 
 .center {
