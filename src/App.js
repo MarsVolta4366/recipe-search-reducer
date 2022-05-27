@@ -12,7 +12,7 @@ function App() {
 
   const { theme } = useContext(ThemeContext)
   const [params, setParams] = useState({})
-  const { data, loading, error } = useFetchRecipes(params)
+  const { data, loading, error } = useFetchRecipes("complexSearch", params)
 
   console.log(data)
 
@@ -23,13 +23,15 @@ function App() {
           <Navbar />
           {/* Spacing div because of fixed navbar */}
           <div style={{ height: "75px" }}></div>
-          {/* Loading div only displays when loading === true */}
-          {loading && <div className="flex">
-            <CircularProgress style={{ marginTop: "10px" }} />
-          </div>}
           <Routes>
             <Route path="/" element={
-              <RecipeGallery data={data} />
+              <>
+                {/* Loading div only displays when loading === true */}
+                {loading && <div className="flex">
+                  <CircularProgress style={{ marginTop: "10px" }} />
+                </div>}
+                <RecipeGallery data={data} />
+              </>
             } />
             <Route path="/showRecipe/:recipeId" element={
               <RecipeShow />

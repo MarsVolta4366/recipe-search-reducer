@@ -7,7 +7,8 @@ const ACTIONS = {
     ERROR: "error"
 }
 
-const BASE_URL = "https://api.spoonacular.com/recipes/complexSearch?apiKey=a40e27eb395e4e92a5f5dcb1c521082b"
+const BASE_URL = "https://api.spoonacular.com/recipes/"
+const apiKey = "a40e27eb395e4e92a5f5dcb1c521082b"
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -27,7 +28,7 @@ const reducer = (state, action) => {
     }
 }
 
-const useFetchRecipes = (params) => {
+const useFetchRecipes = (endPoint, params) => {
 
     const [state, dispatch] = useReducer(reducer, { data: [], loading: true })
 
@@ -35,8 +36,8 @@ const useFetchRecipes = (params) => {
         const fetchData = async () => {
             try {
                 dispatch({ type: ACTIONS.MAKE_REQUEST })
-                const response = await axios.get(BASE_URL, {
-                    params: { ...params }
+                const response = await axios.get(`${BASE_URL}${endPoint}`, {
+                    params: { ...params, apiKey }
                 })
                 dispatch({ type: ACTIONS.GET_DATA, payload: { data: response.data } })
             } catch (err) {
@@ -44,7 +45,7 @@ const useFetchRecipes = (params) => {
             }
         }
         fetchData()
-    }, [params])
+    }, [params, endPoint])
 
     return state
 }
