@@ -1,0 +1,43 @@
+@use "../scss/abstracts/colors" as *;
+
+.recipeShowContainer {
+    margin-top: 10px !important;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.light.table {
+    background-color: white;
+}
+
+.dark.table {
+    background-color: $dark-700;
+}
+
+.light.tableCell {
+    background-color: white;
+    color: $dark-900;
+    text-align: center;
+}
+
+.dark.tableCell {
+    background-color: $dark-700;
+    color: white;
+    text-align: center;
+}
+
+.typography {
+    text-align: left;
+    border-bottom: 1px solid $gray-200;
+    padding: 10px;
+}
+
+.light.panelBackground {
+    background-color: white;
+}
+
+.dark.panelBackground {
+    background-color: $dark-700;
+}
