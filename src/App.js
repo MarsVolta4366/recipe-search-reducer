@@ -16,11 +16,15 @@ function App() {
 
   console.log(data)
 
+  const searchRecipes = (e) => {
+    setParams({ [e.target.name]: e.target.value })
+  }
+
   return (
     <div className={`${theme}`}>
       <div className="background container">
         <Router>
-          <Navbar />
+          <Navbar searchRecipes={searchRecipes} />
           {/* Spacing div because of fixed navbar */}
           <div style={{ height: "75px" }}></div>
           <Routes>

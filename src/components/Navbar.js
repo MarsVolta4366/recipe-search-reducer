@@ -1,13 +1,15 @@
 import { DarkMode, Search } from "@mui/icons-material"
 import { Input, InputAdornment } from "@mui/material"
-import { useContext } from "react"
-import { Link } from "react-router-dom"
+import { useContext, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { ThemeContext } from "../context/ThemeContext"
 import styles from "./navbar.module.scss"
 
-const Navbar = () => {
+const Navbar = ({ searchRecipes }) => {
 
     const { theme, setTheme } = useContext(ThemeContext)
+    const [searchEvent, setSearchEvent] = useState({ target: { name: "", value: "" } })
+    const navigate = useNavigate()
 
     return (
         <nav className={`${styles.nav} ${styles[theme]}`}>
@@ -19,9 +21,22 @@ const Navbar = () => {
                 disableUnderline={true}
                 startAdornment={
                     <InputAdornment position="end">
-                        <Search className={`${styles.searchIcon} ${styles[theme]}`} />
+                        <Search className={`${styles.searchIcon} ${styles[theme]}`}
+                            onClick={() => {
+                                searchRecipes(searchEvent)
+                                navigate("/")
+                            }}
+                        />
                     </InputAdornment>
                 }
+                name="query"
+                onChange={(e) => setSearchEvent(e)}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        searchRecipes(e)
+                        navigate("/")
+                    }
+                }}
             />
             <ul className="text">
                 <li>About</li>
