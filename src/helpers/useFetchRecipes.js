@@ -15,13 +15,19 @@ const reducer = (state, action) => {
         case ACTIONS.MAKE_REQUEST:
             return { loading: true, data: [] }
         case ACTIONS.GET_DATA:
-            return { ...state, loading: false, data: action.payload.data }
+            return {
+                ...state,
+                loading: false,
+                data: action.payload.data,
+                pageCount: Math.ceil(action.payload.data.totalResults / 10)
+            }
         case ACTIONS.ERROR:
             return {
                 ...state,
                 loading: false,
                 error: action.payload.error,
-                data: []
+                data: [],
+                pageCount: 0
             }
         default:
             return state

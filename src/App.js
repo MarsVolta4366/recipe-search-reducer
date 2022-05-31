@@ -1,47 +1,94 @@
+import { createTheme, ThemeProvider } from "@mui/material"
 import { useContext, useState } from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import LoadingSpinner from "./components/LoadingSpinner"
 import Navbar from "./components/Navbar"
 import RecipeGallery from "./components/RecipeGallery"
 import RecipeShow from "./components/RecipeShow"
+import ResultsPagination from "./components/ResultsPagination"
 import { ThemeContext } from "./context/ThemeContext"
 import useFetchRecipes from "./helpers/useFetchRecipes"
 import "./scss/_main.scss"
+
+const muiTheme = createTheme({
+  components: {
+    MuiPaginationItem: {
+      variants: [
+        {
+          props: {
+            variant: "lightPagination"
+          },
+          style: {
+            color: "#101113",
+            backgroundColor: "white",
+            marginBottom: "10px"
+          }
+        },
+        {
+          props: {
+            variant: "darkPagination"
+          },
+          style: {
+            color: "white",
+            backgroundColor: "#212529",
+            marginBottom: "10px"
+          }
+        }
+      ]
+    }
+  }
+})
 
 function App() {
 
   const { theme } = useContext(ThemeContext)
   const [params, setParams] = useState({})
-  const { data, loading, error } = useFetchRecipes("complexSearch", params)
+  const [currentPage, setCurrentPage] = useState(1)
+  const { data, loading, error, pageCount } = useFetchRecipes("complexSearch", params)
 
   console.log(data)
 
   const searchRecipes = (e) => {
     setParams({ [e.target.name]: e.target.value })
+    setCurrentPage(1)
   }
 
   return (
-    <div className={`${theme}`}>
-      <div className="background container">
-        <Router>
-          <Navbar searchRecipes={searchRecipes} />
-          {/* Spacing div because of fixed navbar */}
-          <div style={{ height: "75px" }}></div>
-          <Routes>
-            <Route path="/" element={
-              <>
-                {/* LoadingSpinner only displays when loading === true */}
-                {loading && <LoadingSpinner />}
-                <RecipeGallery data={data} />
-              </>
-            } />
-            <Route path="/showRecipe/:recipeId" element={
-              <RecipeShow />
-            } />
-          </Routes>
-        </Router>
+    <ThemeProvider theme={muiTheme}>
+      <div className={`${theme}`}>
+        <div className="background container">
+          <Router>
+            <Navbar searchRecipes={searchRecipes} />
+            {/* Spacing div because of fixed navbar */}
+            <div style={{ height: "75px" }}></div>
+            <Routes>
+              <Route path="/" element={
+                <>
+                  {/* LoadingSpinner only displays when loading === true */}
+                  {loading && <LoadingSpinner />}
+                  <RecipeGallery data={data} />
+                  {
+                    !loading &&
+                    <div className="flex">
+                      <ResultsPagination
+                        params={params}
+                        setParams={setParams}
+                        pageCount={pageCount}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        theme={theme} />
+                    </div>
+                  }
+                </>
+              } />
+              <Route path="/showRecipe/:recipeId" element={
+                <RecipeShow />
+              } />
+            </Routes>
+          </Router>
+        </div>
       </div>
-    </div>
+    </ThemeProvider>
   )
 }
 
