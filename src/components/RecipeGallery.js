@@ -10,23 +10,27 @@ const RecipeGallery = ({ data }) => {
     let dataDisplay = []
 
     if (data.results) {
-        dataDisplay = data.results.map((recipe, index) => {
-            return (
-                <Link to={`/showRecipe/${recipe.id}`} key={index} className="link">
-                    <Card className={`${styles.card} ${styles[theme]}`}>
-                        <CardMedia
-                            component="img"
-                            height="200"
-                            image={recipe.image}
-                            alt={recipe.title}
-                        />
-                        <CardContent className={`${styles.cardContent} ${styles[theme]}`}>
-                            <h2 style={{ textAlign: "center", fontSize: "20px" }} className="text">{recipe.title}</h2>
-                        </CardContent>
-                    </Card>
-                </Link>
-            )
-        })
+        if (data.results.length === 0) {
+            dataDisplay = <p className="text">No results matched your search.</p>
+        } else {
+            dataDisplay = data.results.map((recipe, index) => {
+                return (
+                    <Link to={`/showRecipe/${recipe.id}`} key={index} className="link">
+                        <Card className={`${styles.card} ${styles[theme]}`}>
+                            <CardMedia
+                                component="img"
+                                height="200"
+                                image={recipe.image}
+                                alt={recipe.title}
+                            />
+                            <CardContent className={`${styles.cardContent} ${styles[theme]}`}>
+                                <h2 style={{ textAlign: "center", fontSize: "20px" }} className="text">{recipe.title}</h2>
+                            </CardContent>
+                        </Card>
+                    </Link>
+                )
+            })
+        }
     }
 
     return (

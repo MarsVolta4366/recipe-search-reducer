@@ -47,6 +47,7 @@ function App() {
   const { data, loading, error, pageCount } = useFetchRecipes("complexSearch", params)
 
   console.log(data)
+  console.log(error)
 
   const searchRecipes = (e) => {
     setParams({ [e.target.name]: e.target.value })
@@ -77,6 +78,12 @@ function App() {
                         currentPage={currentPage}
                         setCurrentPage={setCurrentPage}
                         theme={theme} />
+                    </div>
+                  }
+                  {
+                    error &&
+                    <div className="flex">
+                      <p className="text">Your daily points limit of 150 has been reached.</p>
                     </div>
                   }
                 </>
