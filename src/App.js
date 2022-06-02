@@ -59,7 +59,7 @@ function App() {
       <div className={`${theme}`}>
         <div className="background container">
           <Router>
-            <Navbar searchRecipes={searchRecipes} params={params} setParams={setParams} />
+            <Navbar searchRecipes={searchRecipes} params={params} setParams={setParams} setCurrentPage={setCurrentPage} />
             {/* Spacing div because of fixed navbar */}
             <div style={{ height: "75px" }}></div>
             <Routes>

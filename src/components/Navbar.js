@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { ThemeContext } from "../context/ThemeContext"
 import styles from "./navbar.module.scss"
 
-const Navbar = ({ searchRecipes, params, setParams }) => {
+const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
 
     const { theme, setTheme } = useContext(ThemeContext)
     const [searchEvent, setSearchEvent] = useState({ target: { name: "", value: "" } })
@@ -24,14 +24,17 @@ const Navbar = ({ searchRecipes, params, setParams }) => {
 
     // Add param or set to undefined as toggled
     const toggleFilter = (paramName, paramValue) => {
+        setCurrentPage(1)
         if (params[paramName] === paramValue) {
             setParams({
                 ...params,
+                offset: 0,
                 [paramName]: undefined
             })
         } else {
             setParams({
                 ...params,
+                offset: 0,
                 [paramName]: paramValue
             })
         }
