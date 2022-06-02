@@ -53,9 +53,9 @@
 
     .light.searchIcon {
         color: $gray-700;
-        margin-right: 5px;
         background-color: white;
         cursor: pointer;
+        margin-right: 5px;
 
         &:hover {
             color: $dark-900;
@@ -64,9 +64,9 @@
 
     .dark.searchIcon {
         color: $gray-600;
-        margin-right: 5px;
         background-color: $gray-900;
         cursor: pointer;
+        margin-right: 5px;
 
         &:hover {
             color: white;

@@ -50,7 +50,7 @@ function App() {
   console.log(error)
 
   const searchRecipes = (e) => {
-    setParams({ [e.target.name]: e.target.value })
+    setParams({ ...params, [e.target.name]: e.target.value })
     setCurrentPage(1)
   }
 
@@ -59,7 +59,7 @@ function App() {
       <div className={`${theme}`}>
         <div className="background container">
           <Router>
-            <Navbar searchRecipes={searchRecipes} />
+            <Navbar searchRecipes={searchRecipes} params={params} setParams={setParams} />
             {/* Spacing div because of fixed navbar */}
             <div style={{ height: "75px" }}></div>
             <Routes>
