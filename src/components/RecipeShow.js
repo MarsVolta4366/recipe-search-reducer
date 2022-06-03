@@ -55,6 +55,7 @@ const RecipeShow = () => {
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>Dairy Free</TableCell>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>Gluten Free</TableCell>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>Vegetarian</TableCell>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>Vegan</TableCell>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>Ready In</TableCell>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>Amount of Servings</TableCell>
                                 </TableRow>
@@ -64,6 +65,7 @@ const RecipeShow = () => {
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.dairyFree ? "Yes" : "No"}</TableCell>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.glutenFree ? "Yes" : "No"}</TableCell>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.vegetarian ? "Yes" : "No"}</TableCell>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.vegan ? "Yes" : "No"}</TableCell>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.readyInMinutes} Minutes</TableCell>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.servings} Servings</TableCell>
                                 </TableRow>

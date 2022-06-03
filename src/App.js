@@ -35,6 +35,32 @@ const muiTheme = createTheme({
           }
         }
       ]
+    },
+    MuiFormControlLabel: {
+      variants: [
+        {
+          props: {
+            variant: "lightFormLabel"
+          },
+          style: {
+            margin: "0",
+            paddingRight: "20px",
+            width: "100%"
+          }
+        }
+      ]
+    },
+    MuiMenuItem: {
+      variants: [
+        {
+          props: {
+            variant: "lightMenuItem"
+          },
+          style: {
+            padding: "0"
+          }
+        }
+      ]
     }
   }
 })
