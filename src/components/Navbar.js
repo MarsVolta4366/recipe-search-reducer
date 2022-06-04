@@ -9,7 +9,7 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
 
     const { theme, setTheme } = useContext(ThemeContext)
     const [searchEvent, setSearchEvent] = useState({ target: { name: "", value: "" } })
-    const [filterCheckBoxes, setFilterCheckBoxes] = useState({ dairyFree: false, glutenFree: false, vegetarian: false, vegan: false, treeNutFree: false })
+    const [filterCheckBoxes, setFilterCheckBoxes] = useState({ dairyFree: false, glutenFree: false, vegetarian: false, vegan: false, ketogenic: false, treeNutFree: false, peanutFree: false, seafoodFree: false })
     const navigate = useNavigate()
 
     // For drop down filter menu
@@ -79,9 +79,9 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                 open={open}
                 onClose={handleFilterClose}
             >
-                <h3 className={styles.menuHeading}>Diet</h3>
+                <h3 className={`${styles.menuHeading} ${styles[theme]}`}>Diet</h3>
                 <MenuItem variant="lightMenuItem">
-                    <FormControlLabel control={<Checkbox checked={filterCheckBoxes.glutenFree}
+                    <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.glutenFree}
                         onClick={() => {
                             setFilterCheckBoxes(prevFilters => {
                                 return {
@@ -91,10 +91,10 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                             })
                             toggleFilter("diet", "Gluten Free")
                         }}
-                    />} variant="lightFormLabel" label="Gluten Free" />
+                    />} className={`${styles.formLabel} ${styles[theme]}`} label="Gluten Free" />
                 </MenuItem>
                 <MenuItem variant="lightMenuItem">
-                    <FormControlLabel control={<Checkbox checked={filterCheckBoxes.vegetarian}
+                    <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.vegetarian}
                         onClick={() => {
                             setFilterCheckBoxes(prevFilters => {
                                 return {
@@ -104,10 +104,10 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                             })
                             toggleFilter("diet", "Vegetarian")
                         }}
-                    />} variant="lightFormLabel" label="Vegetarian" />
+                    />} className={`${styles.formLabel} ${styles[theme]}`} label="Vegetarian" />
                 </MenuItem>
                 <MenuItem variant="lightMenuItem">
-                    <FormControlLabel control={<Checkbox checked={filterCheckBoxes.vegan}
+                    <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.vegan}
                         onClick={() => {
                             setFilterCheckBoxes(prevFilters => {
                                 return {
@@ -117,11 +117,24 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                             })
                             toggleFilter("diet", "Vegan")
                         }}
-                    />} variant="lightFormLabel" label="Vegan" />
+                    />} className={`${styles.formLabel} ${styles[theme]}`} label="Vegan" />
                 </MenuItem>
-                <h3 className={styles.menuHeading}>Intolerances</h3>
                 <MenuItem variant="lightMenuItem">
-                    <FormControlLabel control={<Checkbox checked={filterCheckBoxes.dairyFree}
+                    <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.ketogenic}
+                        onClick={() => {
+                            setFilterCheckBoxes(prevFilters => {
+                                return {
+                                    ...prevFilters,
+                                    ketogenic: !prevFilters.ketogenic
+                                }
+                            })
+                            toggleFilter("diet", "Ketogenic")
+                        }}
+                    />} className={`${styles.formLabel} ${styles[theme]}`} label="Ketogenic" />
+                </MenuItem>
+                <h3 className={`${styles.menuHeading} ${styles[theme]}`}>Intolerances</h3>
+                <MenuItem variant="lightMenuItem">
+                    <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.dairyFree}
                         onClick={() => {
                             setFilterCheckBoxes(prevFilters => {
                                 return {
@@ -131,10 +144,10 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                             })
                             toggleFilter("intolerances", "Dairy")
                         }}
-                    />} variant="lightFormLabel" label="Dairy" />
+                    />} className={`${styles.formLabel} ${styles[theme]}`} label="Dairy" />
                 </MenuItem>
                 <MenuItem variant="lightMenuItem">
-                    <FormControlLabel control={<Checkbox checked={filterCheckBoxes.treeNutFree}
+                    <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.treeNutFree}
                         onClick={() => {
                             setFilterCheckBoxes(prevFilters => {
                                 return {
@@ -144,7 +157,33 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                             })
                             toggleFilter("intolerances", "Tree Nut")
                         }}
-                    />} variant="lightFormLabel" label="Tree Nuts" />
+                    />} className={`${styles.formLabel} ${styles[theme]}`} label="Tree Nuts" />
+                </MenuItem>
+                <MenuItem variant="lightMenuItem">
+                    <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.peanutFree}
+                        onClick={() => {
+                            setFilterCheckBoxes(prevFilters => {
+                                return {
+                                    ...prevFilters,
+                                    peanutFree: !prevFilters.peanutFree
+                                }
+                            })
+                            toggleFilter("intolerances", "Peanut")
+                        }}
+                    />} className={`${styles.formLabel} ${styles[theme]}`} label="Peanuts" />
+                </MenuItem>
+                <MenuItem variant="lightMenuItem">
+                    <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.seafoodFree}
+                        onClick={() => {
+                            setFilterCheckBoxes(prevFilters => {
+                                return {
+                                    ...prevFilters,
+                                    seafoodFree: !prevFilters.seafoodFree
+                                }
+                            })
+                            toggleFilter("intolerances", "Seafood")
+                        }}
+                    />} className={`${styles.formLabel} ${styles[theme]}`} label="Seafood" />
                 </MenuItem>
             </Menu>
             <ul className="text">

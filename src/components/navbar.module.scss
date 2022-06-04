@@ -74,8 +74,17 @@
     }
 }
 
-.menuHeading {
-    margin: 10px;
+.light.menuHeading {
+    padding: 10px;
+    margin: 0;
+    background-color: white;
+}
+
+.dark.menuHeading {
+    padding: 10px;
+    margin: 0;
+    background-color: $dark-700;
+    color: white;
 }
 
 .light {
@@ -84,4 +93,36 @@
 
 .dark {
     background-color: $secondary;
+}
+
+.light.formLabel {
+    background-color: white;
+    margin: 0;
+    padding-right: 20px;
+    width: 100%;
+
+    &:hover {
+        background-color: $dark-000;
+    }
+}
+
+.dark.formLabel {
+    background-color: $dark-700;
+    color: white;
+    margin: 0;
+    padding-right: 20px;
+    width: 100%;
+
+    &:hover {
+        background-color: $dark-600;
+    }
+}
+
+.dark.checkbox {
+    color: white;
+    background-color: transparent;
+}
+
+.light.checkbox {
+    background-color: transparent;
 }
