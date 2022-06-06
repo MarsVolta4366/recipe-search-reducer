@@ -1,0 +1,56 @@
+@use "../scss/abstracts/colors" as *;
+
+.light.contact {
+    background-color: white;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px gray;
+}
+
+.dark.contact {
+    background-color: $dark-700;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px black;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 0 auto;
+}
+
+.light.textArea {
+    width: 400px !important;
+    resize: vertical;
+    box-sizing: border-box;
+    min-height: 200px;
+    padding: 5px;
+    font-size: 17px;
+}
+
+.dark.textArea {
+    width: 400px !important;
+    resize: vertical;
+    box-sizing: border-box;
+    min-height: 200px;
+    padding: 5px;
+    font-size: 17px;
+    background-color: $dark-600;
+    color: white;
+}
+
+.light.inputLabel {
+    color: $gray-700;
+}
+
+.dark.inputLabel {
+    color: $gray-600;
+}

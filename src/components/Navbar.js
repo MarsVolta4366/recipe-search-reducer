@@ -188,7 +188,7 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
             </Menu>
             <ul className="text">
                 <li>About</li>
-                <li>Contact</li>
+                <li><Link to="/contact" className="link text">Contact</Link></li>
                 <li>Spoonacular API</li>
                 <li><DarkMode onClick={() => {
                     theme === "light" ? localStorage.setItem("theme", "dark") : localStorage.setItem("theme", "light")

@@ -1,6 +1,7 @@
 import { createTheme, ThemeProvider } from "@mui/material"
 import { useContext, useState } from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import Contact from "./components/Contact"
 import LoadingSpinner from "./components/LoadingSpinner"
 import Navbar from "./components/Navbar"
 import RecipeGallery from "./components/RecipeGallery"
@@ -102,6 +103,9 @@ function App() {
               } />
               <Route path="/showRecipe/:recipeId" element={
                 <RecipeShow />
+              } />
+              <Route path="/contact" element={
+                <Contact />
               } />
             </Routes>
           </Router>
