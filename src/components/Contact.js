@@ -41,18 +41,18 @@ const Contact = () => {
                         <InputLabel htmlFor="fullName" className={`${styles.inputLabel} ${styles[theme]}`}>
                             Full Name
                         </InputLabel>
-                        <Input id="fullName" name="fullName" className="text" required />
+                        <Input id="fullName" name="fullName" className="text" required inputProps={{ maxLength: 40 }} />
                     </FormControl>
 
                     <FormControl variant="standard" style={{ marginTop: "10px" }}>
                         <InputLabel htmlFor="email" className={`${styles.inputLabel} ${styles[theme]}`}>
                             Email
                         </InputLabel>
-                        <Input id="email" name="email" className="text" required />
+                        <Input id="email" name="email" type="email" className="text" required inputProps={{ maxLength: 40 }} />
                     </FormControl>
 
                     <label htmlFor="message"><h3 className="text">Message</h3></label>
-                    <textarea id="message" name="message" className={`${styles.textArea} ${styles[theme]}`} placeholder="Enter your message" required />
+                    <textarea id="message" name="message" className={`${styles.textArea} ${styles[theme]}`} placeholder="Enter your message" required maxLength="1000" />
 
                     <Button type="submit" className="text" style={{ marginTop: "10px", marginBottom: "10px" }}>Submit</Button>
 
