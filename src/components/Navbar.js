@@ -199,9 +199,8 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                 </MenuItem>
             </Menu>
             <ul className="text">
-                <li>About</li>
                 <li><Link to="/contact" className="link text">Contact</Link></li>
-                <li>Spoonacular API</li>
+                <li><a href="https://spoonacular.com/food-api" target="_blank" rel="noreferrer" className="link text">Spoonacular API</a></li>
                 <li><DarkMode onClick={() => {
                     theme === "light" ? localStorage.setItem("theme", "dark") : localStorage.setItem("theme", "light")
                     setTheme(theme === "light" ? "dark" : "light")
