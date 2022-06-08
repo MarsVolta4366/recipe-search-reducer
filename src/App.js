@@ -55,12 +55,11 @@ const muiTheme = createTheme({
 function App() {
 
   const { theme } = useContext(ThemeContext)
-  const [params, setParams] = useState({})
+  const [params, setParams] = useState({ intolerances: "" })
   const [currentPage, setCurrentPage] = useState(1)
   const { data, loading, error, pageCount } = useFetchRecipes("complexSearch", params)
 
-  console.log(data)
-  console.log(error)
+  console.log(params)
 
   const searchRecipes = (e) => {
     setParams({ ...params, [e.target.name]: e.target.value })

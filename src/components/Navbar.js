@@ -1,5 +1,5 @@
 import { ArrowDropDown, DarkMode, Search } from "@mui/icons-material"
-import { Checkbox, FormControlLabel, Input, InputAdornment, Menu, MenuItem } from "@mui/material"
+import { Checkbox, FormControl, FormControlLabel, Input, InputAdornment, Menu, MenuItem, Radio, RadioGroup } from "@mui/material"
 import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { ThemeContext } from "../context/ThemeContext"
@@ -9,7 +9,8 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
 
     const { theme, setTheme } = useContext(ThemeContext)
     const [searchEvent, setSearchEvent] = useState({ target: { name: "", value: "" } })
-    const [filterCheckBoxes, setFilterCheckBoxes] = useState({ dairyFree: false, glutenFree: false, vegetarian: false, vegan: false, ketogenic: false, treeNutFree: false, peanutFree: false, seafoodFree: false })
+    const [filterCheckBoxes, setFilterCheckBoxes] = useState({ dairyFree: false, treeNutFree: false, peanutFree: false, seafoodFree: false })
+    const [selectedRadio, setSelectedRadio] = useState("None")
     const navigate = useNavigate()
 
     // For drop down filter menu
@@ -22,20 +23,45 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
         setAnchorEl(null)
     }
 
-    // Add param or set to undefined as toggled
-    const toggleFilter = (paramName, paramValue) => {
+    const handleRadioChange = (e) => {
         setCurrentPage(1)
-        if (params[paramName] === paramValue) {
+        if (e.target.value === "None") {
             setParams({
                 ...params,
                 offset: 0,
-                [paramName]: undefined
+                diet: undefined
             })
         } else {
             setParams({
                 ...params,
                 offset: 0,
-                [paramName]: paramValue
+                diet: e.target.value
+            })
+        }
+        setSelectedRadio(e.target.value)
+    }
+
+    const toggleIntolerance = (intolerance) => {
+        setCurrentPage(1)
+        if (params.intolerances.includes(intolerance)) {
+            setParams(prevParams => {
+                let intolerancesArray = prevParams.intolerances.split(",").filter(item => item !== "")
+                intolerancesArray = intolerancesArray.filter(item => item !== intolerance)
+                return {
+                    ...prevParams,
+                    offset: 0,
+                    intolerances: intolerancesArray.toString()
+                }
+            })
+        } else {
+            setParams(prevParams => {
+                let intolerancesArray = prevParams.intolerances.split(",").filter(item => item !== "")
+                intolerancesArray.push(intolerance)
+                return {
+                    ...prevParams,
+                    offset: 0,
+                    intolerances: intolerancesArray.toString()
+                }
             })
         }
     }
@@ -80,58 +106,44 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                 onClose={handleFilterClose}
             >
                 <h3 className={`${styles.menuHeading} ${styles[theme]}`}>Diet</h3>
-                <MenuItem variant="lightMenuItem">
-                    <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.glutenFree}
-                        onClick={() => {
-                            setFilterCheckBoxes(prevFilters => {
-                                return {
-                                    ...prevFilters,
-                                    glutenFree: !prevFilters.glutenFree
-                                }
-                            })
-                            toggleFilter("diet", "Gluten Free")
-                        }}
-                    />} className={`${styles.formLabel} ${styles[theme]}`} label="Gluten Free" />
-                </MenuItem>
-                <MenuItem variant="lightMenuItem">
-                    <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.vegetarian}
-                        onClick={() => {
-                            setFilterCheckBoxes(prevFilters => {
-                                return {
-                                    ...prevFilters,
-                                    vegetarian: !prevFilters.vegetarian
-                                }
-                            })
-                            toggleFilter("diet", "Vegetarian")
-                        }}
-                    />} className={`${styles.formLabel} ${styles[theme]}`} label="Vegetarian" />
-                </MenuItem>
-                <MenuItem variant="lightMenuItem">
-                    <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.vegan}
-                        onClick={() => {
-                            setFilterCheckBoxes(prevFilters => {
-                                return {
-                                    ...prevFilters,
-                                    vegan: !prevFilters.vegan
-                                }
-                            })
-                            toggleFilter("diet", "Vegan")
-                        }}
-                    />} className={`${styles.formLabel} ${styles[theme]}`} label="Vegan" />
-                </MenuItem>
-                <MenuItem variant="lightMenuItem">
-                    <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.ketogenic}
-                        onClick={() => {
-                            setFilterCheckBoxes(prevFilters => {
-                                return {
-                                    ...prevFilters,
-                                    ketogenic: !prevFilters.ketogenic
-                                }
-                            })
-                            toggleFilter("diet", "Ketogenic")
-                        }}
-                    />} className={`${styles.formLabel} ${styles[theme]}`} label="Ketogenic" />
-                </MenuItem>
+                <FormControl style={{ width: "100%" }}>
+                    <RadioGroup
+                        name="radio-buttons-group"
+                        value={selectedRadio}
+                        onChange={handleRadioChange}
+                    >
+                        <FormControlLabel
+                            value="None"
+                            control={<Radio className={`${styles.checkbox} ${styles[theme]}`} />}
+                            className={`${styles.formLabel} ${styles[theme]}`}
+                            label="None"
+                        />
+                        <FormControlLabel
+                            value="Gluten Free"
+                            control={<Radio className={`${styles.checkbox} ${styles[theme]}`} />}
+                            className={`${styles.formLabel} ${styles[theme]}`}
+                            label="Gluten Free"
+                        />
+                        <FormControlLabel
+                            value="Vegetarian"
+                            control={<Radio className={`${styles.checkbox} ${styles[theme]}`} />}
+                            className={`${styles.formLabel} ${styles[theme]}`}
+                            label="Vegetarian"
+                        />
+                        <FormControlLabel
+                            value="Vegan"
+                            control={<Radio className={`${styles.checkbox} ${styles[theme]}`} />}
+                            className={`${styles.formLabel} ${styles[theme]}`}
+                            label="Vegan"
+                        />
+                        <FormControlLabel
+                            value="Ketogenic"
+                            control={<Radio className={`${styles.checkbox} ${styles[theme]}`} />}
+                            className={`${styles.formLabel} ${styles[theme]}`}
+                            label="Ketogenic"
+                        />
+                    </RadioGroup>
+                </FormControl>
                 <h3 className={`${styles.menuHeading} ${styles[theme]}`}>Intolerances</h3>
                 <MenuItem variant="lightMenuItem">
                     <FormControlLabel control={<Checkbox className={`${styles.checkbox} ${styles[theme]}`} checked={filterCheckBoxes.dairyFree}
@@ -142,7 +154,7 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                                     dairyFree: !prevFilters.dairyFree
                                 }
                             })
-                            toggleFilter("intolerances", "Dairy")
+                            toggleIntolerance("Dairy")
                         }}
                     />} className={`${styles.formLabel} ${styles[theme]}`} label="Dairy" />
                 </MenuItem>
@@ -155,7 +167,7 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                                     treeNutFree: !prevFilters.treeNutFree
                                 }
                             })
-                            toggleFilter("intolerances", "Tree Nut")
+                            toggleIntolerance("Tree Nut")
                         }}
                     />} className={`${styles.formLabel} ${styles[theme]}`} label="Tree Nuts" />
                 </MenuItem>
@@ -168,7 +180,7 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                                     peanutFree: !prevFilters.peanutFree
                                 }
                             })
-                            toggleFilter("intolerances", "Peanut")
+                            toggleIntolerance("Peanut")
                         }}
                     />} className={`${styles.formLabel} ${styles[theme]}`} label="Peanuts" />
                 </MenuItem>
@@ -181,7 +193,7 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                                     seafoodFree: !prevFilters.seafoodFree
                                 }
                             })
-                            toggleFilter("intolerances", "Seafood")
+                            toggleIntolerance("Seafood")
                         }}
                     />} className={`${styles.formLabel} ${styles[theme]}`} label="Seafood" />
                 </MenuItem>
