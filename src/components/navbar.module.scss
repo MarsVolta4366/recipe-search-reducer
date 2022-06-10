@@ -126,3 +126,33 @@
 .light.checkbox {
     background-color: transparent;
 }
+
+.dark.sideMenu {
+    height: 100%;
+    width: 250px;
+    background-color: $dark-900;
+}
+
+.light.sideMenu {
+    height: 100%;
+    width: 250px;
+    background-color: white;
+}
+
+.showOnMediaQuery {
+    display: none;
+}
+
+@media only screen and (max-width: 800px) {
+    .hideOnMediaQuery {
+        display: none !important;
+    }
+
+    .showOnMediaQuery {
+        display: inline;
+    }
+
+    .searchInput {
+        margin-left: 20px;
+    }
+}

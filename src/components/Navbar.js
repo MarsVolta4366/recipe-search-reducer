@@ -1,5 +1,5 @@
-import { ArrowDropDown, DarkMode, Search } from "@mui/icons-material"
-import { Checkbox, FormControl, FormControlLabel, Input, InputAdornment, Menu, MenuItem, Radio, RadioGroup } from "@mui/material"
+import { Api, ArrowDropDown, ContactPage, DarkMode, Search, Menu as HamburgerIcon, Home } from "@mui/icons-material"
+import { Box, Button, Checkbox, Drawer, FormControl, FormControlLabel, Input, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Radio, RadioGroup } from "@mui/material"
 import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { ThemeContext } from "../context/ThemeContext"
@@ -11,6 +11,7 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
     const [searchEvent, setSearchEvent] = useState({ target: { name: "", value: "" } })
     const [filterCheckBoxes, setFilterCheckBoxes] = useState({ dairyFree: false, treeNutFree: false, peanutFree: false, seafoodFree: false })
     const [selectedRadio, setSelectedRadio] = useState("None")
+    const [anchorOpen, setAnchorOpen] = useState(false)
     const navigate = useNavigate()
 
     // For drop down filter menu
@@ -66,10 +67,17 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
         }
     }
 
+    const toggleDrawer = (open) => {
+        setAnchorOpen(open)
+    }
+
     return (
         <nav className={`${styles.nav} ${styles[theme]}`}>
             <Link to="/" className="link">
-                <h1 className="text">RecipeSearch</h1>
+                <h1 className={`text ${styles.hideOnMediaQuery}`}>RecipeSearch</h1>
+            </Link>
+            <Link to="/" className={`link ${styles.showOnMediaQuery}`} style={{ marginLeft: "20px" }}>
+                <Home className="text" />
             </Link>
             <Input
                 className={`${styles.searchInput} ${styles[theme]}`}
@@ -198,7 +206,7 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                     />} className={`${styles.formLabel} ${styles[theme]}`} label="Seafood" />
                 </MenuItem>
             </Menu>
-            <ul className="text">
+            <ul className={`text ${styles.hideOnMediaQuery}`}>
                 <li><Link to="/contact" className="link text">Contact</Link></li>
                 <li><a href="https://spoonacular.com/food-api" target="_blank" rel="noreferrer" className="link text">Spoonacular API</a></li>
                 <li><DarkMode onClick={() => {
@@ -207,7 +215,58 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                 }} />
                 </li>
             </ul>
-        </nav>
+
+            <Button onClick={() => toggleDrawer(true)} className={styles.showOnMediaQuery}><HamburgerIcon className="text" /></Button>
+            <Drawer
+                anchor="right"
+                open={anchorOpen}
+                onClose={() => toggleDrawer(false)}
+            >
+                <Box
+                    className={`${styles.sideMenu} ${styles[theme]}`}
+                    role="presentation"
+                    onClick={() => toggleDrawer(false)}
+                >
+                    <List className={theme}>
+                        <Link to="/contact" className="link text">
+                            <ListItem disablePadding className={`${styles.sideMenu} ${styles[theme]}`}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <ContactPage className="text" />
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Contact"} className="text" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
+                        <a href="https://spoonacular.com/food-api" target="_blank" rel="noreferrer" className="link text">
+                            <ListItem disablePadding className={`${styles.sideMenu} ${styles[theme]}`}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <Api className="text" />
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Spoonacular API"} className="text" />
+                                </ListItemButton>
+                            </ListItem>
+                        </a>
+                        <ListItem
+                            disablePadding
+                            className={`${styles.sideMenu} ${styles[theme]}`}
+                            onClick={() => {
+                                theme === "light" ? localStorage.setItem("theme", "dark") : localStorage.setItem("theme", "light")
+                                setTheme(theme === "light" ? "dark" : "light")
+                            }}
+                        >
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <DarkMode className="text" />
+                                </ListItemIcon>
+                                <ListItemText primary={theme === "light" ? "Dark Mode" : "Light Mode"} className="text" />
+                            </ListItemButton>
+                        </ListItem>
+                    </List>
+                </Box>
+            </Drawer>
+        </nav >
     )
 }
 
