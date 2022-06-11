@@ -44,7 +44,17 @@ const muiTheme = createTheme({
             variant: "lightMenuItem"
           },
           style: {
-            padding: "0"
+            padding: "0",
+            backgroundColor: "white"
+          }
+        },
+        {
+          props: {
+            variant: "darkMenuItem"
+          },
+          style: {
+            padding: "0",
+            backgroundColor: "#1A1B1E !important"
           }
         }
       ]
