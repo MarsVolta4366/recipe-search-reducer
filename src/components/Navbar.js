@@ -228,6 +228,13 @@ const Navbar = ({ searchRecipes, params, setParams, setCurrentPage }) => {
                     onClick={() => toggleDrawer(false)}
                 >
                     <List className={theme}>
+                        <Link to="/" className="link text">
+                            <ListItem disablePadding className={`${styles.sideMenu} ${styles[theme]}`}>
+                                <ListItemButton>
+                                    <ListItemText primary={"RecipeSearch"} className="text" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
                         <Link to="/contact" className="link text">
                             <ListItem disablePadding className={`${styles.sideMenu} ${styles[theme]}`}>
                                 <ListItemButton>

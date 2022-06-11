@@ -3,7 +3,7 @@ import {
     TableContainer, TableHead, TableRow, Typography
 } from "@mui/material"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { ThemeContext } from "../context/ThemeContext"
 import useFetchRecipes from "../helpers/useFetchRecipes"
@@ -19,6 +19,10 @@ const RecipeShow = () => {
     const { data, loading, error } = useFetchRecipes(`${recipeId}/information`)
 
     console.log(data)
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     let ingredients
     let instructions
@@ -46,9 +50,9 @@ const RecipeShow = () => {
             {loading && <LoadingSpinner />}
             {data.title &&
                 <>
-                    <img src={data.image} alt={data.title} />
+                    <img src={data.image} alt={data.title} className={styles.recipeImage} />
                     <h2 className="text">{data.title}</h2>
-                    <TableContainer component={Paper} className={`${styles.table} ${styles[theme]}`}>
+                    <TableContainer component={Paper} className={`${styles.table} ${styles[theme]} ${styles.hideOnMediaQuery}`}>
                         <Table>
                             <TableHead>
                                 <TableRow>
@@ -65,6 +69,40 @@ const RecipeShow = () => {
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.dairyFree ? "Yes" : "No"}</TableCell>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.glutenFree ? "Yes" : "No"}</TableCell>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.vegetarian ? "Yes" : "No"}</TableCell>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.vegan ? "Yes" : "No"}</TableCell>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.readyInMinutes} Minutes</TableCell>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.servings} Servings</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+
+                    {/* Mobile table */}
+                    <TableContainer component={Paper} className={`${styles.table} ${styles[theme]} ${styles.showOnMediaQuery}`}>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>Dairy Free</TableCell>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>Gluten Free</TableCell>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>Vegetarian</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.dairyFree ? "Yes" : "No"}</TableCell>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.glutenFree ? "Yes" : "No"}</TableCell>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.vegetarian ? "Yes" : "No"}</TableCell>
+                                </TableRow>
+                            </TableBody>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>Vegan</TableCell>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>Ready In</TableCell>
+                                    <TableCell className={`${styles.tableCell} ${styles[theme]}`}>Amount of Servings</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.vegan ? "Yes" : "No"}</TableCell>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.readyInMinutes} Minutes</TableCell>
                                     <TableCell className={`${styles.tableCell} ${styles[theme]}`}>{data.servings} Servings</TableCell>
@@ -98,7 +136,7 @@ const RecipeShow = () => {
                     </Accordion>
                     <Button startIcon={<ArrowBackIosNew className="text" />}
                         className="text"
-                        style={{ marginTop: "10px" }}
+                        style={{ marginTop: "10px", marginBottom: "40px" }}
                         onClick={() => navigate(-1)}>
                         Back to Results
                     </Button>

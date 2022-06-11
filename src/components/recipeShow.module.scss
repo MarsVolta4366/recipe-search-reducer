@@ -41,3 +41,28 @@
 .dark.panelBackground {
     background-color: $dark-700;
 }
+
+.recipeImage {
+    max-width: 100vw;
+}
+
+.showOnMediaQuery {
+    display: none !important;
+}
+
+@media only screen and (max-width: 800px) {
+
+    .hideOnMediaQuery {
+        display: none !important;
+    }
+
+    .recipeShowContainer {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+    }
+
+    .showOnMediaQuery {
+        display: block !important;
+    }
+}

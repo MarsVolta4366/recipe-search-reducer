@@ -140,7 +140,7 @@
 }
 
 .showOnMediaQuery {
-    display: none;
+    display: none !important;
 }
 
 @media only screen and (max-width: 800px) {
@@ -149,7 +149,7 @@
     }
 
     .showOnMediaQuery {
-        display: inline;
+        display: inline !important;
     }
 
     .searchInput {
