@@ -28,7 +28,7 @@
 }
 
 .light.textArea {
-    width: 400px !important;
+    width: 400px;
     resize: vertical;
     box-sizing: border-box;
     min-height: 200px;
@@ -37,7 +37,7 @@
 }
 
 .dark.textArea {
-    width: 400px !important;
+    width: 400px;
     resize: vertical;
     box-sizing: border-box;
     min-height: 200px;
@@ -53,4 +53,22 @@
 
 .dark.inputLabel {
     color: $gray-600;
+}
+
+@media only screen and (max-width: 800px) {
+    .contact {
+        width: 100% !important;
+        box-sizing: border-box;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        margin-top: 0px !important;
+    }
+
+    .flexColumn {
+        width: 100% !important;
+    }
+
+    .textArea {
+        width: 100% !important;
+    }
 }

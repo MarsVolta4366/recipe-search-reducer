@@ -1,7 +1,7 @@
 import { Alert, Button, FormControl, Input, InputLabel } from "@mui/material"
 import emailjs from "@emailjs/browser"
 import styles from "./contact.module.scss"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ThemeContext } from "../context/ThemeContext"
 
 const Result = () => {
@@ -14,6 +14,10 @@ const Contact = () => {
 
     const { theme } = useContext(ThemeContext)
     const [result, showResult] = useState(false)
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     const sendEmail = (e) => {
         e.preventDefault()
