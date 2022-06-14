@@ -18,8 +18,6 @@ const RecipeShow = () => {
     const navigate = useNavigate()
     const { data, loading, error } = useFetchRecipes(`${recipeId}/information`)
 
-    console.log(data)
-
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])

@@ -69,8 +69,6 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1)
   const { data, loading, error, pageCount } = useFetchRecipes("complexSearch", params)
 
-  console.log(params)
-
   const searchRecipes = (e) => {
     setParams({ ...params, [e.target.name]: e.target.value })
     setCurrentPage(1)
